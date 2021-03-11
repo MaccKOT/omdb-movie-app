@@ -14,6 +14,8 @@ class Main extends React.Component {
     };
   }
 
+  // TODO! More films loading with page param (now its load only 10 films)
+
   componentDidMount() {
     this.searchMovies('Matrix'); //default search after app loading
 
