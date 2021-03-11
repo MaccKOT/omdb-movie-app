@@ -15,5 +15,8 @@ module.exports = {
   rules: {
     // suppress errors for missing 'import React' in files
     // 'react/react-in-jsx-scope': 'off',
+
+    //https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prop-types.md
+    'react/prop-types': 'off',
   },
 };
