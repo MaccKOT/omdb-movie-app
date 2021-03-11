@@ -22,7 +22,7 @@ class Main extends React.Component {
   }
 
   searchMovies = (searchValue, type = 'all') => {
-    const url = `http://www.omdbapi.com/?s=${searchValue}${
+    const url = `https://www.omdbapi.com/?s=${searchValue}${
       type !== 'all' ? `&type=${type}` : ''
     }&apikey=${import.meta.env.VITE_OMDB_API_KEY}`;
 
