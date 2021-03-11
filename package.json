@@ -1,7 +1,7 @@
 {
   "name": "omdb-movie-app",
   "version": "0.0.0",
-  "homepage": "http://macckot.github.io/omdb-movie-app",
+  "homepage": "https://macckot.github.io/omdb-movie-app/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
