@@ -10,32 +10,36 @@ class Main extends React.Component {
     super(props);
     this.state = {
       movies: [],
+      loading: true,
     };
   }
 
   componentDidMount() {
-    this.searchMovies('Matrix');
+    this.searchMovies('Matrix'); //default search after app loading
 
     //or download data from mockupData directly to state
     // this.setState({ movies: mockupData });
   }
 
-  searchMovies = (searchValue) => {
-    const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=${
-      import.meta.env.VITE_OMDB_API_KEY
-    }`;
+  searchMovies = (searchValue, type = 'all') => {
+    const url = `http://www.omdbapi.com/?s=${searchValue}${
+      type !== 'all' ? `&type=${type}` : ''
+    }&apikey=${import.meta.env.VITE_OMDB_API_KEY}`;
+
+    this.setState({ loading: true });
+
     fetch(url)
       .then((response) => response.json())
-      .then((data) => this.setState({ movies: data.Search }));
+      .then((data) => this.setState({ movies: data.Search, loading: false }));
   };
 
   render() {
-    const { movies } = this.state;
+    const { movies, loading } = this.state;
 
     return (
       <main className='container content'>
         <Search searchMovies={this.searchMovies} />
-        {movies.length ? <Movies movies={movies} /> : <Preloader />}
+        {!loading ? <Movies movies={movies} /> : <Preloader />}
       </main>
     );
   }
