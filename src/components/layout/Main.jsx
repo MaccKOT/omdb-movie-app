@@ -1,7 +1,8 @@
 import React from 'react';
 
-import mockupData from '../../mockupData';
+// import mockupData from '../../mockupData';
 import Movies from '../../components/Movies';
+import Preloader from '../../components/Preloader';
 
 class Main extends React.Component {
   constructor(props) {
@@ -12,11 +13,17 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
-    // fetch('url')
-    //   .then((response) => response.json())
-    //   .then((data) => this.setState({ movies: data.Search }));
+    let searchValue = 'Matrix';
 
-    this.setState({ movies: mockupData });
+    const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=${
+      import.meta.env.VITE_OMDB_API_KEY
+    }`;
+
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => this.setState({ movies: data.Search }));
+
+    // this.setState({ movies: mockupData });
   }
 
   render() {
@@ -24,11 +31,7 @@ class Main extends React.Component {
 
     return (
       <main className='container content'>
-        {movies.length ? (
-          <Movies movies={movies} />
-        ) : (
-          <h5>Loading movies...</h5>
-        )}
+        {movies.length ? <Movies movies={movies} /> : <Preloader />}
       </main>
     );
   }
